@@ -359,7 +359,12 @@ footer{padding-block:32px 44px;border-top:1px solid var(--rule);font-family:var(
 .lang button[aria-pressed="true"]{color:var(--amber)}
 .lang-ind{position:absolute;top:3px;bottom:3px;left:3px;width:0;border-radius:999px;border:1px solid rgba(255,182,73,.6);background:var(--amber-soft);transition:left .5s cubic-bezier(.6,-.25,.25,1.25),width .5s cubic-bezier(.6,-.25,.25,1.25)}
 .contact .v,.jump a i{font-style:normal}
-@media (max-width:560px){.hdr-r{gap:6px}.lang button{padding:7px 8px}.tab{padding:8px 12px}}
+.lang button{display:inline-flex;align-items:center;gap:7px}
+.flag{display:block;width:20px;height:14px;border-radius:3px;overflow:hidden;flex:none;box-shadow:0 0 0 1px rgba(255,255,255,.2);filter:saturate(.3) brightness(.75);opacity:.7;transition:filter .35s,opacity .35s,transform .35s var(--out)}
+.flag svg{display:block;width:100%;height:100%}
+.lang button:hover .flag{filter:none;opacity:1}
+.lang button[aria-pressed="true"] .flag{filter:none;opacity:1;transform:scale(1.08)}
+@media (max-width:560px){.hdr-r{gap:6px}.lang button{padding:6px 7px}.lang .code{display:none}.tab{padding:8px 12px}}
 </style>
 </head>
 <body>
@@ -379,8 +384,8 @@ footer{padding-block:32px 44px;border-top:1px solid var(--rule);font-family:var(
       </div>
       <div class="lang" role="group" aria-label="Language" data-i18n-attr="aria-label:nav.lang">
         <span class="lang-ind" id="langInd" aria-hidden="true"></span>
-        <button type="button" data-lang="en" aria-pressed="true" title="English" lang="en">EN</button>
-        <button type="button" data-lang="it" aria-pressed="false" title="Italiano" lang="it">IT</button>
+        <button type="button" data-lang="en" aria-pressed="true" title="English" lang="en"><span class="flag"><svg viewBox="0 0 60 30" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><clipPath id="ukS"><path d="M0,0 v30 h60 v-30 z"/></clipPath><clipPath id="ukT"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><g clip-path="url(#ukS)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#ukT)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg></span><span class="code">EN</span></button>
+        <button type="button" data-lang="it" aria-pressed="false" title="Italiano" lang="it"><span class="flag"><svg viewBox="0 0 3 2" preserveAspectRatio="none" aria-hidden="true"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#F4F5F0"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg></span><span class="code">IT</span></button>
       </div>
     </div>
   </div>
@@ -550,7 +555,7 @@ footer{padding-block:32px 44px;border-top:1px solid var(--rule);font-family:var(
   <section id="cooking">
     <div class="sec-head">
       <div><p class="eyebrow" data-i18n="co.eyebrow">03 · The recipe box</p><h2 data-scramble data-i18n="co.h">Cooking</h2></div>
-      <p data-i18n="co.p">Romagna classics and one borrowed from Ukraine. Set the number of guests and the quantities adjust. Tick ingredients off as you shop.</p>
+      <p data-i18n="co.p">Romagna classics and a winter risotto from Veneto. Set the number of guests and the quantities adjust. Tick ingredients off as you shop.</p>
     </div>
     <div class="kitchen reveal">
       <div class="r-list" role="tablist" aria-label="Recipes" data-i18n-attr="aria-label:co.aria" id="rlist"></div>
@@ -677,7 +682,7 @@ it:{
   'hi.p':'La mia città, raccontata attraverso i suoi monumenti. Tocca una scheda per girarla.',
   'tile.hint':'Tocca per girare ↻','tile.aria':'{n}: gira la scheda per la storia',
   'co.eyebrow':'03 · Il ricettario','co.h':'Cucina','co.aria':'Ricette',
-  'co.p':'Classici romagnoli e una ricetta presa in prestito dall’Ucraina. Imposta il numero di ospiti e le quantità si adattano. Spunta gli ingredienti mentre fai la spesa.',
+  'co.p':'Classici romagnoli e un risotto invernale dal Veneto. Imposta il numero di ospiti e le quantità si adattano. Spunta gli ingredienti mentre fai la spesa.',
   'rec.guests':'Ospiti','rec.shop':'Lista della spesa','rec.method':'Preparazione','rec.count':'{n} di {m} nel carrello','rec.all':'Tutto nel carrello ✓','rec.clear':'Svuota lista',
   'sp.eyebrow':'04 · Abbonamenti stagionali','sp.h':'Sport',
   'sp.p':'Gli sport che mi tengono in equilibrio tra un rapporto e l’altro, i miei record di corsa e i percorsi su cui torno sempre.',
@@ -960,14 +965,14 @@ document.addEventListener('pointermove',e=>{const el=e.target.closest&&e.target.
      ing:[[300,'g',{en:'00 flour',it:'farina 00'}],[3,'',{en:['egg (pasta)','eggs (pasta)'],it:['uovo (sfoglia)','uova (sfoglia)']}],[200,'g',{en:'squacquerone or ricotta',it:'squacquerone o ricotta'}],[80,'g',{en:'Parmigiano Reggiano, grated',it:'Parmigiano Reggiano grattugiato'}],[1,'',{en:['egg (filling)','eggs (filling)'],it:['uovo (ripieno)','uova (ripieno)']}],[1,'',{en:['lemon, for zest','lemons, for zest'],it:['limone (scorza)','limoni (scorza)']}],[2,'L',{en:'capon broth',it:'brodo di cappone'}],[null,'',{en:'nutmeg and salt to taste',it:'noce moscata e sale q.b.'}]],
      st:{en:['Mix the cheeses, egg, a little lemon zest and nutmeg into a firm filling.','Knead the flour and eggs into a smooth dough and rest it for 30 minutes.','Roll the pasta thin and cut it into 4 cm squares.','Add a small dot of filling, fold into a triangle, then join the tips around your finger to make the “little hat”.','Simmer in the capon broth for 3–4 minutes and serve in the broth itself.'],
          it:['Mescola i formaggi, l’uovo, un po’ di scorza di limone e la noce moscata fino a ottenere un ripieno sodo.','Impasta farina e uova fino a ottenere un impasto liscio e lascialo riposare 30 minuti.','Stendi una sfoglia sottile e tagliala in quadrati di 4 cm.','Metti un po’ di ripieno al centro, piega a triangolo, poi unisci le punte attorno al dito per formare il “cappelletto”.','Cuoci nel brodo di cappone per 3–4 minuti e servi in brodo.']}},
-    {n:{en:'Ukrainian borscht',it:'Borscht ucraino'},o:{en:'Borrowed from Ukraine',it:'Preso in prestito dall’Ucraina'},base:4,
-     ing:[[400,'g',{en:'beetroot, grated',it:'barbabietola grattugiata'}],[300,'g',{en:'beef on the bone',it:'manzo con l’osso'}],[300,'g',{en:'potatoes, cubed',it:'patate a cubetti'}],[300,'g',{en:'white cabbage, shredded',it:'cavolo bianco a listarelle'}],[1,'',{en:['carrot','carrots'],it:['carota','carote']}],[1,'',{en:['onion','onions'],it:['cipolla','cipolle']}],[2,'tbsp',{en:'tomato paste',it:'concentrato di pomodoro'}],[1,'tbsp',{en:'vinegar',it:'aceto'}],[2,'',{en:['garlic clove','garlic cloves'],it:['spicchio d’aglio','spicchi d’aglio']}],[2,'L',{en:'water',it:'acqua'}],[null,'',{en:'sour cream and dill to serve',it:'panna acida e aneto per servire'}]],
-     st:{en:['Simmer the beef in the water for about 1.5 hours to make a broth.','Sauté the onion and carrot, then add the beetroot, tomato paste and vinegar to keep the colour.','Add the potatoes to the broth, then the cabbage after 10 minutes.','Stir in the beetroot mixture and simmer for 10 minutes. Finish with crushed garlic.','Rest it off the heat. Serve with sour cream, dill and dark bread.'],
-         it:['Fai sobbollire il manzo nell’acqua per circa un’ora e mezza per ottenere il brodo.','Soffriggi cipolla e carota, poi aggiungi barbabietola, concentrato e aceto per mantenere il colore.','Aggiungi le patate al brodo e, dopo 10 minuti, il cavolo.','Unisci il composto di barbabietola e cuoci per 10 minuti. Completa con l’aglio schiacciato.','Lascia riposare fuori dal fuoco. Servi con panna acida, aneto e pane nero.']}}
+    {n:'Risotto al radicchio',o:{en:'Veneto · a winter favourite',it:'Veneto · un classico invernale'},base:4,
+     ing:[[320,'g',{en:'Carnaroli rice',it:'riso Carnaroli'}],[300,'g',{en:'radicchio di Treviso, cut into strips',it:'radicchio di Treviso a listarelle'}],[1,'',{en:['shallot','shallots'],it:['scalogno','scalogni']}],[.5,'glass',{en:'dry red wine',it:'vino rosso secco'}],[1.25,'L',{en:'hot vegetable broth',it:'brodo vegetale caldo'}],[50,'g',{en:'butter',it:'burro'}],[60,'g',{en:'Parmigiano Reggiano, grated',it:'Parmigiano Reggiano grattugiato'}],[null,'',{en:'olive oil, salt and pepper',it:'olio d’oliva, sale e pepe q.b.'}]],
+     st:{en:['Soften the chopped shallot in a little olive oil and half the butter.','Add the radicchio and let it wilt for a few minutes.','Toast the rice for 2 minutes, then pour in the wine and let it evaporate.','Add the hot broth a ladle at a time, stirring, for about 16–18 minutes.','Off the heat, stir in the rest of the butter and the Parmigiano. Rest for a minute, then serve.'],
+         it:['Fai appassire lo scalogno tritato con un filo d’olio e metà del burro.','Aggiungi il radicchio e lascialo appassire per qualche minuto.','Tosta il riso per 2 minuti, poi sfuma con il vino rosso e lascialo evaporare.','Aggiungi il brodo caldo un mestolo alla volta, mescolando, per circa 16–18 minuti.','Fuori dal fuoco manteca con il burro rimasto e il Parmigiano, lascia riposare un minuto e servi.']}}
   ];
   const list=$('#rlist'),card=$('#rcard');let cur=0,serv=4;
-  let got={};try{got=JSON.parse(localStorage.getItem('em-basket')||'{}')||{}}catch(e){}
-  const save=()=>{try{localStorage.setItem('em-basket',JSON.stringify(got))}catch(e){}};
+  let got={};try{got=JSON.parse(localStorage.getItem('em-basket-v2')||'{}')||{}}catch(e){}
+  const save=()=>{try{localStorage.setItem('em-basket-v2',JSON.stringify(got))}catch(e){}};
   const scale=(v,u)=>{if(v==null)return null;let x=v*serv/R[cur].base;
     if(u==='g'||u==='ml')return x>=100?Math.round(x/10)*10:Math.round(x/5)*5;
     if(u===''||u==='tbsp'||u==='pinch')return Math.max(.5,Math.round(x*2)/2);
