@@ -343,6 +343,11 @@ section{padding-block:76px;border-top:1px solid var(--rule);scroll-margin-top:70
 .lvl{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
 .lvl b{font-family:var(--display);font-weight:800;font-size:30px;letter-spacing:0;color:var(--amber);margin-left:8px}
 .lvl small{font-size:11px;margin-left:2px}
+.pad{margin-top:10px}
+.pad .lv-bar{display:block;margin-bottom:8px}
+.pad-meta{display:flex;flex-direction:column;gap:2px;font-family:var(--mono);font-size:11.5px;color:var(--ink-2)}
+.pad-meta b{color:var(--ink);font-weight:500}
+.pad-meta em{font-style:normal;color:var(--reg5)}
 .t-link{position:relative;z-index:1;font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;text-decoration:none;color:var(--on-amber);background:var(--amber-fill);padding:7px 14px;border-radius:999px;transition:box-shadow .3s,transform .3s var(--out)}
 .t-link:hover{box-shadow:0 0 22px rgba(255,182,73,.45);transform:translateY(-1px)}
 .records{margin-top:56px}
@@ -923,7 +928,7 @@ en:{
   'cf.label':'{i} of {n}: {t}','cf.frame':'Frame','cf.ph':'Placeholder, photo coming soon','cf.go':'Go to photo {i}',
   'tile.hint':'Tap to flip ↻','tile.aria':'{n}: flip for the story',
   'rec.guests':'Guests','rec.shop':'Shopping list','rec.method':'Method','rec.count':'{n} of {m} in the basket','rec.all':'All in the basket ✓','rec.clear':'Clear list',
-  't.pass':'Season pass','t.venue':'Venue','t.since':'Member since','t.admit':'Admit one','t.level':'Playtomic level','t.link':'My padel score on Playtomic ↗',
+  't.pass':'Season pass','t.venue':'Venue','t.since':'Member since','t.admit':'Admit one','t.level':'Playtomic level','t.link':'My padel score on Playtomic ↗','t.reliab':'Level reliability','t.last':'Last match','t.win':'Win',
   'r.steps':'Most steps in a day','r.longest':'Longest run','r.year':'Distance this year','r.stepsU':'steps','r.soon':'Time coming soon',
   'rt.run':'Run','rt.hike':'Hike','rt.runRoute':'Running route','rt.hikeRoute':'Hiking route','rt.dist':'Distance','rt.gain':'Elevation gain','rt.high':'Highest point',
   'rt.at':'At {p}/km','rt.walk':'Walking time','rt.hint':'Hover or drag along the profile','rt.grad':'gradient','rt.start':'START / FINISH',
@@ -1012,7 +1017,7 @@ it:{
   'rec.guests':'Ospiti','rec.shop':'Lista della spesa','rec.method':'Preparazione','rec.count':'{n} di {m} nel carrello','rec.all':'Tutto nel carrello ✓','rec.clear':'Svuota lista',
   'sp.eyebrow':'04 · Abbonamenti stagionali','sp.h':'Sport',
   'sp.p':'Gli sport che mi tengono in equilibrio tra un rapporto e l’altro, i miei record di corsa e i percorsi su cui torno sempre.',
-  't.pass':'Abbonamento','t.venue':'Dove','t.since':'Dal','t.admit':'Ingresso singolo','t.level':'Livello Playtomic','t.link':'Il mio punteggio padel su Playtomic ↗',
+  't.pass':'Abbonamento','t.venue':'Dove','t.since':'Dal','t.admit':'Ingresso singolo','t.level':'Livello Playtomic','t.link':'Il mio punteggio padel su Playtomic ↗','t.reliab':'Affidabilità del livello','t.last':'Ultima partita','t.win':'Vittoria',
   'rec.h':'Record di corsa','rec.note':'Record personali · in arrivo','rec.pb':'Migliori tempi',
   'r.steps':'Più passi in un giorno','r.longest':'Corsa più lunga','r.year':'Distanza quest’anno','r.stepsU':'passi','r.soon':'Tempo in arrivo',
   'rt.h':'Percorsi','rt.note':'Percorso di esempio · tracce GPS reali in arrivo',
@@ -1434,7 +1439,7 @@ document.addEventListener('pointermove',e=>{const el=e.target.closest&&e.target.
     hiking:'<path class="i-l" d="M4 44 L20 18 L28 30 L36 20 L48 44Z"/><path class="i-f" d="M20 18 L20 8 L28 11 L20 14"/>'
   };
   const TK=[
-    {s:'Padel',i:'padel',line:{en:'Doubles with friends most weeks. My level and match results are on Playtomic.',it:'In doppio con gli amici quasi ogni settimana. Il mio livello e i risultati delle partite sono su Playtomic.'},where:{en:'Local clubs',it:'Circoli della zona'},since:{en:'Add year',it:'Anno da aggiungere'},level:null,link:'https://playtomic.io/'},
+    {s:'Padel',i:'padel',line:{en:'Doubles with friends most weeks. My level and match results are on Playtomic.',it:'In doppio con gli amici quasi ogni settimana. Il mio livello e i risultati delle partite sono su Playtomic.'},where:{en:'Local clubs',it:'Circoli della zona'},since:{en:'Add year',it:'Anno da aggiungere'},level:2.67,reliab:54,last:{d:'2026-04-04',sets:'6–0 · 3–6 · 6–2',delta:.09},link:'https://playtomic.io/'},
     {s:{en:'Running',it:'Corsa'},i:'running',line:{en:'Early runs to clear my head before a day of reading and writing.',it:'Corse all’alba per schiarirmi le idee prima di una giornata di letture e scrittura.'},where:{en:'City parks',it:'Parchi cittadini'},since:{en:'Add year',it:'Anno da aggiungere'}},
     {s:{en:'Hiking',it:'Escursionismo'},i:'hiking',line:{en:'Apennine ridges, Scottish hills, Spanish sierras. A map, a flask and a long day out.',it:'Crinali appenninici, colline scozzesi, sierre spagnole. Una mappa, una borraccia e una lunga giornata all’aperto.'},where:{en:'Wherever the trail goes',it:'Ovunque porti il sentiero'},since:{en:'Add year',it:'Anno da aggiungere'}},
     {s:{en:'Football',it:'Calcio'},i:'football',line:{en:'Five-a-side on weeknights. The fastest way to meet people in a new city.',it:'Calcetto a cinque in settimana. Il modo più veloce per conoscere gente in una città nuova.'},where:{en:'Local pitches',it:'Campi della zona'},since:{en:'Childhood',it:'Da bambino'}}
@@ -1445,7 +1450,7 @@ document.addEventListener('pointermove',e=>{const el=e.target.closest&&e.target.
       a.style.transform=`perspective(900px) rotateX(${(-y*9).toFixed(2)}deg) rotateY(${(x*11).toFixed(2)}deg) translateY(-4px)`});
       a.addEventListener('pointerleave',()=>{a.style.transform=''})}
     r.appendChild(a);w.appendChild(r);return a});
-  function paint(){TK.forEach((t,k)=>{cards[k].innerHTML=`<div class="t-main"><div class="t-top"><span>${tr('t.pass')}</span><span>2026</span></div><h3>${tx(t.s)}</h3><p>${tx(t.line)}</p>${t.link?`<div class="t-extra"><span class="lvl">${tr('t.level')}<b>${t.level==null?'—':fmtNum(t.level,0,{maximumFractionDigits:2})}</b><small>/ 7</small></span><a class="t-link" href="${t.link}" target="_blank" rel="noopener">${tr('t.link')}</a></div>`:''}
+  function paint(){TK.forEach((t,k)=>{cards[k].innerHTML=`<div class="t-main"><div class="t-top"><span>${tr('t.pass')}</span><span>2026</span></div><h3>${tx(t.s)}</h3><p>${tx(t.line)}</p>${t.link?`<div class="t-extra"><span class="lvl">${tr('t.level')}<b>${t.level==null?'—':fmtNum(t.level,0,{maximumFractionDigits:2})}</b><small>/ 7</small></span><a class="t-link" href="${t.link}" target="_blank" rel="noopener">${tr('t.link')}</a></div>`:''}${t.level!=null?`<div class="pad"><span class="lv-bar" style="--v:${t.level/7}" role="img" aria-label="${tr('t.level')} ${fmtNum(t.level,0,{maximumFractionDigits:2})} / 7"><i></i></span><div class="pad-meta"><span>${tr('t.reliab')} ${t.reliab}%</span>${t.last?`<span>${tr('t.last')}: ${new Date(t.last.d+'T12:00:00').toLocaleDateString(locale(),{day:'numeric',month:'short',year:'numeric'})} · <b>${tr('t.win')} ${t.last.sets}</b> <em>+${fmtNum(t.last.delta,2)}</em></span>`:''}</div></div>`:''}
       <div class="t-meta"><div><span>${tr('t.venue')}</span><br>${tx(t.where)}</div><div><span>${tr('t.since')}</span><br>${tx(t.since)}</div></div></div>
       <div class="t-stub"><svg viewBox="0 0 52 52" aria-hidden="true">${I[t.i]}</svg><span class="t-no">No. ${String(k+1).padStart(3,'0')}</span><span class="admit">${tr('t.admit')}</span></div>`})}
   onLang.push(paint);paint();
