@@ -929,7 +929,7 @@ en:{
   'tile.hint':'Tap to flip ↻','tile.aria':'{n}: flip for the story',
   'rec.guests':'Guests','rec.shop':'Shopping list','rec.method':'Method','rec.count':'{n} of {m} in the basket','rec.all':'All in the basket ✓','rec.clear':'Clear list',
   't.pass':'Season pass','t.venue':'Venue','t.since':'Member since','t.admit':'Admit one','t.level':'Playtomic level','t.link':'My padel score on Playtomic ↗','t.reliab':'Level reliability','t.last':'Last match','t.win':'Win',
-  'r.steps':'Most steps in a day','r.longest':'Longest run','r.year':'Distance this year','r.stepsU':'steps','r.soon':'Time coming soon',
+  'r.steps':'Most steps in a day','r.longest':'Longest run','r.year':'Distance walked','r.stepsU':'steps','r.soon':'Time coming soon',
   'rt.run':'Run','rt.hike':'Hike','rt.runRoute':'Running route','rt.hikeRoute':'Hiking route','rt.dist':'Distance','rt.gain':'Elevation gain','rt.high':'Highest point',
   'rt.at':'At {p}/km','rt.walk':'Walking time','rt.hint':'Hover or drag along the profile','rt.grad':'gradient','rt.start':'START / FINISH',
   'rt.mapAria':'Map of {n}, {d} km loop','rt.elAria':'Elevation profile of {n}, from {a} to {b} m'
@@ -1019,7 +1019,7 @@ it:{
   'sp.p':'Gli sport che mi tengono in equilibrio tra un rapporto e l’altro, i miei record di corsa e i percorsi su cui torno sempre.',
   't.pass':'Abbonamento','t.venue':'Dove','t.since':'Dal','t.admit':'Ingresso singolo','t.level':'Livello Playtomic','t.link':'Il mio punteggio padel su Playtomic ↗','t.reliab':'Affidabilità del livello','t.last':'Ultima partita','t.win':'Vittoria',
   'rec.h':'Record di corsa','rec.note':'Record personali · dalle mie corse GPS 2026','rec.pb':'Migliori tempi',
-  'r.steps':'Più passi in un giorno','r.longest':'Corsa più lunga','r.year':'Distanza quest’anno','r.stepsU':'passi','r.soon':'Tempo in arrivo',
+  'r.steps':'Più passi in un giorno','r.longest':'Corsa più lunga','r.year':'Distanza a piedi','r.stepsU':'passi','r.soon':'Tempo in arrivo',
   'rt.h':'Percorsi','rt.note':'Registrato con Samsung Health · i primi e gli ultimi metri delle corse sono nascosti',
   'rt.run':'Corsa','rt.hike':'Escursione','rt.runRoute':'Percorso di corsa','rt.hikeRoute':'Percorso escursionistico','rt.dist':'Distanza','rt.gain':'Dislivello','rt.high':'Punto più alto',
   'rt.at':'A {p}/km','rt.walk':'Tempo di cammino','rt.hint':'Passa sopra o trascina lungo il profilo','rt.grad':'pendenza','rt.start':'PARTENZA / ARRIVO',
@@ -1461,7 +1461,7 @@ document.addEventListener('pointermove',e=>{const el=e.target.closest&&e.target.
   const REC={
     steps:20909,  // most steps in a single day (Samsung Health)
     longest:12.3,  // longest run in km (GPS)
-    yearKm:null,  // km run so far this year
+    yearKm:721,   // distance walked, from ~210 days of Samsung Health step data
     pbs:[{d:'5 km',km:5,t:'24:56',where:''},{d:'10 km',km:10,t:'59:02',where:''},{d:{en:'Half marathon',it:'Mezza maratona'},km:21.0975,t:null,where:''},{d:{en:'Marathon',it:'Maratona'},km:42.195,t:null,where:''}]
   };
   const pace=(t,km)=>{const s=Math.round(t.split(':').reduce((a,v)=>a*60+(+v),0)/km);return Math.floor(s/60)+':'+pad(s%60)+' /km'};
