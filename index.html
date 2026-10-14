@@ -227,6 +227,7 @@ section{padding-block:76px;border-top:1px solid var(--rule);scroll-margin-top:70
 .contact .v{font-style:normal}
 .beyond{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:44px;padding:24px 28px;border:1px dashed var(--rule-2);border-radius:8px}
 .beyond p{margin:6px 0 0;color:var(--ink-2)}
+.beyond[hidden]{display:none}
 .btn{display:inline-flex;align-items:center;gap:10px;appearance:none;border:0;cursor:pointer;background:var(--amber-fill);color:var(--on-amber);font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:12px 20px;border-radius:999px;text-decoration:none;transition:transform .35s var(--out),box-shadow .35s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(242,164,58,.6)}
 .btn.ghost{background:none;color:var(--ink);border:1px solid var(--rule-2)}
@@ -809,7 +810,7 @@ h3{font-size:21px;line-height:1.22}
       <div class="glow reveal"><span>CV</span><i class="v" data-i18n="c.cvV">Available on request</i></div>
       <div class="glow reveal"><span data-i18n="c.base">Based in</span><i class="v" data-i18n="c.city">Cesena, Italy</i></div>
     </div>
-    <div class="beyond reveal">
+    <div class="beyond reveal" hidden>
       <div><p class="eyebrow" data-i18n="bw.eyebrow">Beyond work</p><p data-i18n="bw.p">Photography, history, Romagna cooking, padel, running and hiking.</p></div>
       <button type="button" class="btn ghost" data-go="hobbies" data-i18n="bw.btn">Take a look →</button>
     </div>
@@ -911,6 +912,7 @@ h3{font-size:21px;line-height:1.22}
 const NS='http://www.w3.org/2000/svg';
 const $=s=>document.querySelector(s);
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const SHOW_BEYOND=false; // set to true to bring back the "Beyond work" page and its link
 const hooks={work:[],hobbies:[]};
 const onLang=[],onTheme=[];
 
@@ -1589,7 +1591,7 @@ let savedLang=null;try{savedLang=localStorage.getItem('em-lang')}catch(e){}
 const browserLang=((navigator.languages&&navigator.languages[0])||navigator.language||'').toLowerCase().startsWith('it')?'it':'en';
 setLang(I18N[qsLang]?qsLang:I18N[savedLang]?savedLang:browserLang,false);
 const h=(location.hash||'').slice(1);
-if(['hobbies','photography','history','cooking','sports'].includes(h)){show('hobbies',false);if(h!=='hobbies')setTimeout(()=>scrollToId(h),0)}
+if(SHOW_BEYOND&&['hobbies','photography','history','cooking','sports'].includes(h)){show('hobbies',false);if(h!=='hobbies')setTimeout(()=>scrollToId(h),0)}
 else{show('work',false);if(['about','experience','research','expertise','education','contact'].includes(h))setTimeout(()=>scrollToId(h),0)}
 })();
 </script>
