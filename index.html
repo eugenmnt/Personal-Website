@@ -82,7 +82,9 @@ button{font:inherit;color:inherit}
 .mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;flex:none}
 .mark svg{width:22px;height:22px}
 .lg-a{fill:none;stroke:var(--blue);stroke-width:1.5}.lg-b{fill:none;stroke:var(--amber);stroke-width:1.2}.lg-c{fill:var(--amber)}
-.nav{display:flex;gap:22px}
+.nav{display:flex;gap:22px;counter-reset:sec}
+.nav a::before{counter-increment:sec;content:counter(sec,decimal-leading-zero);margin-right:7px;color:var(--ink-3);font-size:.86em;letter-spacing:.06em;transition:color .3s}
+.nav a:hover::before,.nav a[aria-current="true"]::before{color:var(--amber)}
 .nav a{position:relative;font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;padding-block:6px;transition:color .3s}
 .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
 .nav a:hover,.nav a[aria-current="true"]{color:var(--ink)}
@@ -113,8 +115,7 @@ h1{font-family:var(--name);font-weight:800;font-size:clamp(64px,10.5vw,150px);li
 h1 .ln{display:block;overflow:hidden;padding-bottom:.04em}
 h1 .ln>span{display:block;animation:lineUp 1s var(--ease) both}
 h1 .ln:nth-child(2)>span{animation-delay:.09s}
-h1 .ln.accent>span{color:var(--acc-b);filter:drop-shadow(0 0 28px var(--acc-glow))}
-@supports ((-webkit-background-clip:text) or (background-clip:text)){h1 .ln.accent>span{background:linear-gradient(180deg,var(--acc-a) 0%,var(--acc-b) 52%,var(--acc-c) 100%);-webkit-background-clip:text;background-clip:text;color:transparent}}
+h1 .ln.accent>span{color:var(--amber)}
 @keyframes lineUp{from{transform:translateY(105%)}to{transform:none}}
 h2{font-family:var(--display);font-weight:800;font-size:clamp(40px,5.4vw,64px);line-height:.92;text-transform:uppercase;letter-spacing:.01em;margin:0}
 h3{font-family:var(--display);font-weight:700;font-size:25px;line-height:1.1;letter-spacing:.01em;margin:0 0 4px;text-wrap:balance}
@@ -129,15 +130,19 @@ section{padding-block:76px;border-top:1px solid var(--rule);scroll-margin-top:70
 
 /* ===== hero ===== */
 .hero{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:52px 44px}
-.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--rule-2);padding:7px 14px;border-radius:999px;animation:fadeUp .8s .2s var(--out) both}
-.status i{width:7px;height:7px;border-radius:50%;background:var(--amber-fill);animation:ping 2.2s infinite}
+.status{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);padding:0 0 12px;border-bottom:1px solid var(--rule-2);animation:fadeUp .8s .2s var(--out) both}
+.status i{width:7px;height:7px;background:var(--amber-fill);animation:ping 2.2s infinite}
 @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,182,73,.55)}70%{box-shadow:0 0 0 9px rgba(255,182,73,0)}100%{box-shadow:0 0 0 0 rgba(255,182,73,0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.role-line{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0 0 18px;animation:fadeUp .8s .25s var(--out) both}
+.role-line{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2);margin:0 0 18px;animation:fadeUp .8s .25s var(--out) both}
 .lede{font-size:19px;line-height:1.55;max-width:36em;margin:0 0 28px;color:var(--ink);animation:fadeUp .8s .3s var(--out) both}
-.figs{display:flex;flex-wrap:wrap;border-top:1px solid var(--rule);animation:fadeUp .8s .4s var(--out) both}
-.fig{padding:16px 26px 0 0;margin-right:26px;border-right:1px solid var(--rule)}
-.fig:last-child{border-right:0}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--rule-2);background:var(--surface);animation:fadeUp .8s .4s var(--out) both}
+.fig{padding:16px 18px 14px;border-left:1px solid var(--rule-2)}
+.fig:first-child{border-left:0}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;animation:fadeUp .8s .5s var(--out) both}
+.btn.solid{background:var(--ink);color:var(--bg);border-radius:4px}
+.btn.solid:hover{box-shadow:0 10px 26px -10px rgba(14,26,36,.55)}
+.hero-cta .btn.ghost{border-radius:4px}
 .fig b{display:block;font-family:var(--display);font-weight:800;font-size:44px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
 .fig span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2)}
 .globe{position:relative;width:100%;max-width:560px;aspect-ratio:1;justify-self:end;animation:globeIn 1.4s .1s var(--out) both}
@@ -148,7 +153,7 @@ section{padding-block:76px;border-top:1px solid var(--rule);scroll-margin-top:70
 .hud.tl{top:4%;left:2%}.hud.br{bottom:4%;right:2%;text-align:right}
 .hud.bl{bottom:4%;left:2%;max-width:60%}
 .hud.bl strong{display:block;color:var(--ink);font-weight:500;font-size:12px;letter-spacing:.12em}
-.facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0 0 8px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);overflow:hidden}
+.facts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin:0 0 8px;border:1px solid var(--rule-2);border-radius:0;background:var(--surface);overflow:hidden}
 .facts div{padding:16px 18px;border-left:1px solid var(--rule);min-width:0}
 .facts div:first-child{border-left:0}
 .facts dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
@@ -624,6 +629,10 @@ h3{font-size:21px;line-height:1.22}
         <div class="fig"><b>4</b><span data-i18n="fig.2">International institutions</span></div>
         <div class="fig"><b>6</b><span data-i18n="fig.3">Countries worked in</span></div>
       </div>
+      <div class="hero-cta">
+        <a class="btn solid" href="#contact" data-nav data-i18n="w.cta1">Get in touch →</a>
+        <a class="btn ghost" href="#research" data-nav data-i18n="w.cta2">Read my research</a>
+      </div>
     </div>
     <div class="globe" aria-hidden="true">
       <canvas id="globe"></canvas>
@@ -940,7 +949,7 @@ it:{
   'meta.desc':'Eugenio Montalti, analista di policy e ricercatore in sicurezza e difesa europea: esperienza, pubblicazioni e competenze.',
   'theme.toLight':'Passa al tema chiaro','theme.toDark':'Passa al tema scuro',
   'nav.aria':'Sezioni','nav.lang':'Lingua','nav.about':'Profilo','nav.xp':'Esperienza','nav.research':'Ricerca','nav.expertise':'Competenze','nav.edu':'Formazione','nav.contact':'Contatti',
-  'w.status':'Disponibile per ruoli di policy e ricerca',
+  'w.status':'Disponibile per ruoli di policy e ricerca','w.cta1':'Scrivimi →','w.cta2':'Leggi le mie ricerche',
   'w.role':'Analista di policy e ricercatore · Sicurezza e difesa europea',
   'w.lede':'Lavoro dove le evidenze incontrano le decisioni: trasformo ricerca, previsione strategica e analisi di fonti aperte in consulenza chiara sulla sicurezza europea, dalle minacce ibride e dalle politiche di difesa dell’UE alle tecnologie emergenti e al fianco orientale.',
   'fig.1':'Pubblicazioni e analisi','fig.2':'Istituzioni internazionali','fig.3':'Paesi in cui ho lavorato',
